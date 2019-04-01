@@ -13,6 +13,7 @@ import com.matheuscampelo.cursomc.model.Cidade;
 import com.matheuscampelo.cursomc.model.Cliente;
 import com.matheuscampelo.cursomc.model.Endereco;
 import com.matheuscampelo.cursomc.model.Estado;
+import com.matheuscampelo.cursomc.model.ItemPedido;
 import com.matheuscampelo.cursomc.model.Pagamento;
 import com.matheuscampelo.cursomc.model.PagamentoComBoleto;
 import com.matheuscampelo.cursomc.model.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.matheuscampelo.cursomc.repositories.CidadeRepository;
 import com.matheuscampelo.cursomc.repositories.ClienteRepository;
 import com.matheuscampelo.cursomc.repositories.EnderecoRepository;
 import com.matheuscampelo.cursomc.repositories.EstadoRepository;
+import com.matheuscampelo.cursomc.repositories.ItemPedidoRepository;
 import com.matheuscampelo.cursomc.repositories.PagamentoRepository;
 import com.matheuscampelo.cursomc.repositories.PedidoRepository;
 import com.matheuscampelo.cursomc.repositories.ProdutoRepository;
@@ -48,6 +50,8 @@ private ClienteRepository repositoryCliente;
 private PedidoRepository repositoryPedido;
 	@Autowired
 private PagamentoRepository repositoryPagamento;
+	@Autowired
+private ItemPedidoRepository repositoryItemPedido;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -110,6 +114,22 @@ private PagamentoRepository repositoryPagamento;
 	
 	repositoryPedido.saveAll(Arrays.asList(ped1,ped2));
 	repositoryPagamento.saveAll(Arrays.asList(pagto1,pagto2));
+	
+	ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+	ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+	ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 2, 800.00);
+	
+	ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+	ped2.getItens().addAll(Arrays.asList(ip3));
+	
+	p1.getItens().addAll(Arrays.asList(ip1));
+	p2.getItens().addAll(Arrays.asList(ip3));
+	p3.getItens().addAll(Arrays.asList(ip2));
+	
+	repositoryItemPedido.saveAll(Arrays.asList(ip1,ip2,ip3));
+	
+	
+	
 	
 	
 	}
