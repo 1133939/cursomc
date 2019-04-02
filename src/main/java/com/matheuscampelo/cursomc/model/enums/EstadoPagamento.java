@@ -17,7 +17,7 @@ CANCELADO(3, "Cancelado");
 		return this.cod;
 	}
 	
-	public String descricao() {
+	public String getDescricao() {
 	return this.descricao;
 	}
 	
