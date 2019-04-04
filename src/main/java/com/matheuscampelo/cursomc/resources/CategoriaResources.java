@@ -29,11 +29,6 @@ public class CategoriaResources {
 	@Autowired
 	private CategoriaService service;
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria categoria = service.find(id);		
-		return ResponseEntity.ok().body(categoria);
-	}
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
 		Categoria categoria = service.fromDTO(categoriaDTO);
@@ -41,6 +36,11 @@ public class CategoriaResources {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@PathVariable Integer id) {
+		Categoria categoria = service.find(id);		
+		return ResponseEntity.ok().body(categoria);
 	}
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id){
