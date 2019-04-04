@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheuscampelo.cursomc.dto.ClienteDTO;
 import com.matheuscampelo.cursomc.dto.ClienteNewDTO;
-import com.matheuscampelo.cursomc.model.Categoria;
 import com.matheuscampelo.cursomc.model.Cliente;
 import com.matheuscampelo.cursomc.services.ClienteService;
 

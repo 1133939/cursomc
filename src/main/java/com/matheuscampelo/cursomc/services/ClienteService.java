@@ -40,7 +40,6 @@ Optional <Cliente> cliente= repository.findById(id);
 return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com Id: "
 + id +", Tipo: " + Cliente.class.getName() ));
 }
-
 public Cliente insert(Cliente cliente) {
 	cliente.setId(null);
 	cliente = repository.save(cliente);
@@ -73,7 +72,7 @@ public Cliente fromDTO(ClienteDTO clienteDTO) {
 	return new Cliente(clienteDTO.getId(), clienteDTO.getNome(), clienteDTO.getEmail(),null,null);
 }
 public Cliente fromDTO(ClienteNewDTO clienteDTO) {
-	Cliente cli = new Cliente(null, clienteDTO.getNome(),clienteDTO.getEmail(),clienteDTO.getCpfOuCpnj(), TipoCliente.toEnum(clienteDTO.getTipo()));
+	Cliente cli = new Cliente(null, clienteDTO.getNome(),clienteDTO.getEmail(),clienteDTO.getCpfOuCnpj(), TipoCliente.toEnum(clienteDTO.getTipo()));
 	Optional <Cidade> cid = repoCidade.findById(clienteDTO.getCidadeId());
 	Endereco end = new Endereco(null, clienteDTO.getLogradouro(),clienteDTO.getNumero(),clienteDTO.getComplemento(),clienteDTO.getBairro(),clienteDTO.getCep(),cli,cid.orElse(null));
 	cli.getEnderecos().add(end);

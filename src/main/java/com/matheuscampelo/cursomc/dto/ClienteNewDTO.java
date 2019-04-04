@@ -2,21 +2,44 @@ package com.matheuscampelo.cursomc.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.matheuscampelo.cursomc.services.validation.ClienteInsert;
+@ClienteInsert
 public class ClienteNewDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@NotEmpty(message="preenchimento obrigatório")
+	@Length(min=5, max=50, message="deve conter entre 5 a 50 caracteres" )
 	private String nome;
+	
+	@NotEmpty(message="preenchimento obrigatorio")
+	@Email(message="email inválido")
 	private String email;
-	private String cpfOuCpnj;
+	
+	@NotEmpty(message="preenchimento obrigatorio")
+	private String cpfOuCnpj;
+	
 	private Integer tipo;
 	
+	@NotEmpty(message="preenchimento obrigatorio")
 	private String logradouro;
+	
+	@NotEmpty(message="preenchimento obrigatorio")
 	private String numero;
+	
 	private String complemento;
 	private String bairro;
+	
+	@NotEmpty(message="preenchimento obrigatorio")
 	private String cep;
 	
+	@NotEmpty(message="preenchimento obrigatorio")
 	private String telefone1;
+	
 	private String telefone2;
 	private String telefone3;
 	
@@ -31,10 +54,6 @@ public class ClienteNewDTO implements Serializable{
 
 	public String getEmail() {
 		return email;
-	}
-
-	public String getCpfOuCpnj() {
-		return cpfOuCpnj;
 	}
 
 	public Integer getTipo() {
@@ -85,8 +104,8 @@ public class ClienteNewDTO implements Serializable{
 		this.email = email;
 	}
 
-	public void setCpfOuCpnj(String cpfOuCpnj) {
-		this.cpfOuCpnj = cpfOuCpnj;
+	public void setCpfOuCpnj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	public void setTipo(Integer tipo) {
@@ -127,6 +146,10 @@ public class ClienteNewDTO implements Serializable{
 
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+
+	public String getCpfOuCnpj() {
+		return this.cpfOuCnpj;
 	}
 	
 	
