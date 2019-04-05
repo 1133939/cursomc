@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerMapping;
 
 import com.matheuscampelo.cursomc.dto.ClienteDTO;
-import com.matheuscampelo.cursomc.dto.ClienteNewDTO;
 import com.matheuscampelo.cursomc.model.Cliente;
 import com.matheuscampelo.cursomc.repositories.ClienteRepository;
 import com.matheuscampelo.cursomc.resources.exceptions.FieldMessage;
@@ -31,6 +30,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
+		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		Integer uriId = Integer.parseInt(map.get("id"));
 		Cliente aux = repoCliente.findByEmail(objDto.getEmail());
