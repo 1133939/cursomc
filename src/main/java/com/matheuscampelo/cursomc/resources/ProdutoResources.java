@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.matheuscampelo.cursomc.dto.CategoriaDTO;
 import com.matheuscampelo.cursomc.dto.ProdutoDTO;
 import com.matheuscampelo.cursomc.model.Produto;
 import com.matheuscampelo.cursomc.resources.utils.URL;

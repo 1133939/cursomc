@@ -39,7 +39,7 @@ public class Pedido implements Serializable {
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {
-		
+
 	}
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
@@ -48,6 +48,13 @@ public class Pedido implements Serializable {
 		this.instante = instante;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
+	}
+	public Double getValorTotal() {
+		Double total = 0d;
+		for(ItemPedido item : itens) {
+			total = total + item.getSubTotal();
+		}
+		return total;
 	}
 
 	public Integer getId() {
