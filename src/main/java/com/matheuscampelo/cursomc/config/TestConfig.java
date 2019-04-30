@@ -11,6 +11,7 @@ import com.matheuscampelo.cursomc.services.DBService;
 import com.matheuscampelo.cursomc.services.EmailService;
 import com.matheuscampelo.cursomc.services.MockEmailService;
 
+
 @Configuration
 @Profile("test")
 public class TestConfig {
@@ -26,4 +27,5 @@ public boolean instantiateDatabase() throws ParseException {
 	public EmailService emailService() {
 		return new MockEmailService();
 	}
+	
 }
