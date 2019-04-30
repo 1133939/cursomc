@@ -28,6 +28,10 @@ private ProdutoService produtoService;
 private ItemPedidoRepository itemPedidoRepository;
 @Autowired
 private BoletoService boletoService;
+@Autowired
+private ClienteService clienteService;
+@Autowired
+private EmailService emailService;
 
 public Pedido find(Integer id) {
 	Optional<Pedido> pedido = repository.findById(id);
@@ -37,6 +41,7 @@ public Pedido find(Integer id) {
 @Transactional
 public Pedido insert(Pedido pedido) {
 	pedido.setId(null);
+	pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
 	pedido.setInstante(new Date());
 	pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 	pedido.getPagamento().setPedido(pedido);
@@ -45,14 +50,17 @@ public Pedido insert(Pedido pedido) {
 		boletoService.preencherPagamentoComBoleto(pagto, pedido.getInstante());
 	}
 	pedido = repository.save(pedido);
+	
 	pagamentoRepository.save(pedido.getPagamento());
 	for(ItemPedido itemPedido : pedido.getItens()) {
 		itemPedido.setDesconto(0d);
-		itemPedido.setPreco(produtoService.find(itemPedido.getProduto().getId()).getPreco());
+		itemPedido.setProduto(produtoService.find(itemPedido.getProduto().getId()));
+		itemPedido.setPreco(itemPedido.getProduto().getPreco());
 		itemPedido.setPedido(pedido);
 		
 	}
 	itemPedidoRepository.saveAll(pedido.getItens());
+	emailService.sendOrderConfirmationEmail(pedido);
 	return pedido;
 	 
 	
