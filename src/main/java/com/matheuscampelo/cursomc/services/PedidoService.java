@@ -60,7 +60,7 @@ public Pedido insert(Pedido pedido) {
 		
 	}
 	itemPedidoRepository.saveAll(pedido.getItens());
-	emailService.sendOrderConfirmationHtmlEmail(pedido);
+	emailService.sendOrderConfirmationEmail(pedido);
 	return pedido;
 	 
 	
