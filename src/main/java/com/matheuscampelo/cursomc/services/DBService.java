@@ -20,6 +20,7 @@ import com.matheuscampelo.cursomc.model.PagamentoComCartao;
 import com.matheuscampelo.cursomc.model.Pedido;
 import com.matheuscampelo.cursomc.model.Produto;
 import com.matheuscampelo.cursomc.model.enums.EstadoPagamento;
+import com.matheuscampelo.cursomc.model.enums.Perfil;
 import com.matheuscampelo.cursomc.model.enums.TipoCliente;
 import com.matheuscampelo.cursomc.repositories.CategoriaRepository;
 import com.matheuscampelo.cursomc.repositories.CidadeRepository;
@@ -113,14 +114,19 @@ public void instatiateDatabase() throws ParseException {
 	repositoryCidade.saveAll(Arrays.asList(c1,c2,c3));
 	
 	Cliente cli1 = new Cliente(null, "Matheus Campelo", "matheuscampelocavalcante@hotmail.com","03200536101", TipoCliente.PESSOAFISICA, pe.encode("123"));
+	Cliente cli2 = new Cliente(null, "Jubileu", "matheusc.c7@gmail.com","14956828039", TipoCliente.PESSOAFISICA, pe.encode("123"));
 	cli1.getTelefones().addAll(Arrays.asList("61983334445", "6133672698"));
+	cli2.getTelefones().addAll(Arrays.asList("9834349835", "394003943"));
+	cli2.addPerfil(Perfil.ADMIN);
 	
 	Endereco e1 = new Endereco(null, "Rua Flores", "300","Apto 303", "Jardim", "38220834",cli1,c1);
 	Endereco e2 = new Endereco(null, "Rua das Dores","400","Apto 404","Centro","38777012",cli1, c2);
+	Endereco e3 = new Endereco(null, "AV Floriano","11","Casa 4","Zona Sul","28918345",cli2, c2);
 	
 	cli1.getEnderecos().addAll((Arrays.asList(e1,e2)));
-	repositoryCliente.saveAll(Arrays.asList(cli1));
-	repositoryEndereco.saveAll(Arrays.asList(e1,e2));
+	cli2.getEnderecos().addAll((Arrays.asList(e3)));
+	repositoryCliente.saveAll(Arrays.asList(cli1, cli2));
+	repositoryEndereco.saveAll(Arrays.asList(e1,e2,e3));
 	
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
